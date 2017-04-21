@@ -9,3 +9,4 @@ celerybeat-schedule
 celeryev.pid
 dump.rdb
 logs
+.env
