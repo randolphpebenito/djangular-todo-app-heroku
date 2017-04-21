@@ -3,3 +3,12 @@
 SECRET_KEY=<Your Secret Key>
 ALLOWED_HOSTS=127.0.0.1, .localhost, .herokuapp.com
 DEBUG=True
+
+#DB Credentials
+DB_NAME=change_me_db_name
+DB_USER=change_me_user
+DB_PASSWORD=change_me_password
+DB_HOST=127.0.0.1
+
+#Optional for postgresql
+DATABASE_URL=postgresql://[change_me_db_name]:[change_me_password]@localhost/[change_me_db_name]
