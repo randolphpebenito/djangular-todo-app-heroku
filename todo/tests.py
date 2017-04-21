@@ -45,7 +45,7 @@ class TodoSerializerTest(APITestCase):
         s = serializer.save()
         self.assertEquals(s.title, "This is my todo")
 
-class TodoListCreateViewrTest(APITestCase):
+class TodoListCreateViewTest(APITestCase):
     url = reverse('todo:todo-list-create')
 
     def setUp(self):
@@ -87,3 +87,50 @@ class TodoListCreateViewrTest(APITestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(json.loads(response.content)), 2)
 
+class TodoRetrieveUpdateDeleteViewTest(APITestCase):
+
+    def setUp(self):
+        self.invalid_url = reverse('todo:todo-retrieve-update-delete', kwargs={'pk': 1000}) #Not existing pk
+
+    def test_retrieve_invalid_pk(self):
+        response = self.client.get(self.invalid_url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_update_invalid_pk(self):
+        response = self.client.put(self.invalid_url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_delete_invalid_pk(self):
+        response = self.client.put(self.invalid_url)
+        self.assertEqual(response.status_code, 404)
+
+    def test_retrieve_successful(self):
+        Todo.objects.create(title="This is my todo", note="This is just a note")
+
+        url = reverse('todo:todo-retrieve-update-delete', kwargs={'pk': 1}) #Not existing pk
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+        response_data = json.loads(response.content)
+        self.assertEquals(response_data['id'], 1)
+
+    def test_update_successful(self):
+        a = Todo.objects.create(title="This is my todo", note="This is just a note")
+        url = reverse('todo:todo-retrieve-update-delete', kwargs={'pk': a.pk}) #Not existing pk
+        self.assertFalse(a.completed)
+        
+        json_data = json.dumps({ 'completed': True })
+        response = self.client.patch(url, json_data, content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+
+        aa = Todo.objects.get(pk=a.pk)
+        self.assertTrue(aa.completed)
+
+    def test_delete_successful(self):
+        a = Todo.objects.create(title="This is my todo", note="This is just a note")
+        url = reverse('todo:todo-retrieve-update-delete', kwargs={'pk': a.pk}) #Not existing pk
+        response = self.client.delete(url)
+        self.assertEqual(response.status_code, 204)
+        with self.assertRaises(Todo.DoesNotExist):
+            Todo.objects.get(pk=a.pk)
+t
