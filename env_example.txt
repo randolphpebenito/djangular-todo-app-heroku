@@ -1,0 +1,5 @@
+#Example setting up your dev config variable. Copy this file into .env file and configure your own environment vars
+# or in heroku, set this in your CONFIG VARIABLES in your Dashboard settings
+SECRET_KEY=<Your Secret Key>
+ALLOWED_HOSTS=127.0.0.1, .localhost, .herokuapp.com
+DEBUG=True
