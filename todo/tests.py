@@ -133,4 +133,3 @@ class TodoRetrieveUpdateDeleteViewTest(APITestCase):
         self.assertEqual(response.status_code, 204)
         with self.assertRaises(Todo.DoesNotExist):
             Todo.objects.get(pk=a.pk)
-t
