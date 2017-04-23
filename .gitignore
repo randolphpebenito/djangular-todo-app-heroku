@@ -10,3 +10,4 @@ celeryev.pid
 dump.rdb
 logs
 .env
+notes.txt
