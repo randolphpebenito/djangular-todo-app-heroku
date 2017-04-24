@@ -22,7 +22,7 @@ from todo.views import index
 
 urlpatterns = [
     url(r'^$', index, name='index'),
-    url(r'^todo/', include('todo.urls')),
+    url(r'^api/todo/', include('todo.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 
