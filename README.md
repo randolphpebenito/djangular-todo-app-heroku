@@ -21,8 +21,8 @@ $ curl -v -XPATCH -H "Content-Type: application/json" -d '{"title": "This is my 
 ### Running Locally
 
 ```sh
-$ git clone https://github.com/randolphpebenito/simple-hacker-new-clone.git
-$ cd simple-hacker-new-clone
+$ git clone https://github.com/randolphpebenito/djangular-todo-app-heroku.git
+$ cd djangular-todo-app-heroku
 $ virtualenv <venv name>
 $ source <venv name>/bin/activate
 $ pip install -r requirements.txt
